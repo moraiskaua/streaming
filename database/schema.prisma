@@ -40,8 +40,8 @@ model Movie {
   deletedAt   DateTime?  @db.Timestamp(6)
   contentId   String?    @unique @db.Uuid
   thumbnailId String?    @unique @db.Uuid
-  Thumbnail   Thumbnail? @relation(fields: [thumbnailId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  Content     Content?   @relation(fields: [contentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Thumbnail   Thumbnail? @relation(fields: [thumbnailId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Content     Content?   @relation(fields: [contentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   Video       Video?
 }
 
@@ -63,8 +63,8 @@ model TvShow {
   deletedAt   DateTime?  @db.Timestamp(6)
   contentId   String?    @unique @db.Uuid
   thumbnailId String?    @unique @db.Uuid
-  Content     Content?   @relation(fields: [contentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  Thumbnail   Thumbnail? @relation(fields: [thumbnailId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Content     Content?   @relation(fields: [contentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Thumbnail   Thumbnail? @relation(fields: [thumbnailId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   episode     Episode[]
 }
 
