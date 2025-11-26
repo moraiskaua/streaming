@@ -1,5 +1,6 @@
 import { BaseEntity, BaseEntityProps } from '@src/core/entity/base.entity';
 import { randomUUID } from 'crypto';
+import { ContentType } from '../enum/content-type.enum';
 import { MovieEntity } from './movie.entity';
 
 export interface ContentEntityProps extends BaseEntityProps {
@@ -8,13 +9,6 @@ export interface ContentEntityProps extends BaseEntityProps {
     title: string;
     description: string;
 }
-
-export const ContentType: { [x: string]: 'MOVIE' | 'TV_SHOW' } = {
-    MOVIE: 'MOVIE',
-    TV_SHOW: 'TV_SHOW',
-};
-
-export type ContentType = (typeof ContentType)[keyof typeof ContentType];
 
 export class ContentEntity extends BaseEntity {
     private media?: ContentEntityProps['media'];
