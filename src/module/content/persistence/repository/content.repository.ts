@@ -5,7 +5,7 @@ import { DataSource } from 'typeorm';
 
 @Injectable()
 export class ContentRepository extends DefaultTypeOrmRepository<Content> {
-    constructor(@Inject(DataSource) readonly dataSource: DataSource) {
-        super(Content, dataSource);
-    }
+  constructor(@Inject(DataSource) readonly dataSource: DataSource) {
+    super(Content, dataSource);
+  }
 }

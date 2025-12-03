@@ -24,7 +24,7 @@ export class VideoUploadController {
   constructor(
     private readonly contentManagementService: ContentManagementService,
     private readonly mediaPlayerService: MediaPlayerService,
-  ) { }
+  ) {}
 
   @Post('video')
   @HttpCode(HttpStatus.CREATED)

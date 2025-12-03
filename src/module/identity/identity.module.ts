@@ -1,6 +1,6 @@
 import {
-    AuthService,
-    jwtConstants,
+  AuthService,
+  jwtConstants,
 } from '@identityModule/core/service/authentication.service';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';

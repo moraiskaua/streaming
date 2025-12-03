@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MediaPlayerService {
-  constructor(private readonly videoRepository: VideoRepository) { }
+  constructor(private readonly videoRepository: VideoRepository) {}
 
   async prepareStreaming(videoId: string): Promise<string> {
     const video = await this.videoRepository.findOneById(videoId);

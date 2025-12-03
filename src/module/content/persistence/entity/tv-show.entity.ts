@@ -6,14 +6,14 @@ import { Thumbnail } from './thumbnail.entity';
 
 @Entity({ name: 'TvShow' })
 export class TvShow extends DefaultEntity<TvShow> {
-    @OneToMany(() => Episode, (episode) => episode.tvShow)
-    episodes: Episode[];
+  @OneToMany(() => Episode, (episode) => episode.tvShow)
+  episodes: Episode[];
 
-    @OneToOne(() => Content)
-    @JoinColumn()
-    content: Content;
+  @OneToOne(() => Content)
+  @JoinColumn()
+  content: Content;
 
-    @OneToOne(() => Thumbnail)
-    @JoinColumn()
-    thumbnail: Thumbnail;
+  @OneToOne(() => Thumbnail)
+  @JoinColumn()
+  thumbnail: Thumbnail;
 }

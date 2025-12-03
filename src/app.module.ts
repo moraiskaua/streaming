@@ -1,4 +1,3 @@
-
 import { ContentModule } from '@contentModule/content.module';
 import { IdentityModule } from '@identityModule/identity.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';

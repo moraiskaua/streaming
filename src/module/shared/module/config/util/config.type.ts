@@ -1,4 +1,3 @@
-
 import { z } from 'zod';
 import { configSchema, environmentSchema } from './config.schema';
 

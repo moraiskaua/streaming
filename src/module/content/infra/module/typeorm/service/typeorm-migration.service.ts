@@ -4,17 +4,17 @@ import { DataSource } from 'typeorm';
 
 @Injectable()
 export class TypeOrmMigrationService {
-    constructor(@InjectDataSource() private readonly dataSource: DataSource) { }
+  constructor(@InjectDataSource() private readonly dataSource: DataSource) {}
 
-    async migrate(): Promise<void> {
-        const pendingMigrations = await this.dataSource.showMigrations();
-        if (pendingMigrations) {
-            const appliedMigrations = await this.dataSource.runMigrations();
-            console.log('Applied migrations:', appliedMigrations);
-        }
+  async migrate(): Promise<void> {
+    const pendingMigrations = await this.dataSource.showMigrations();
+    if (pendingMigrations) {
+      const appliedMigrations = await this.dataSource.runMigrations();
+      console.log('Applied migrations:', appliedMigrations);
     }
+  }
 
-    async getDataSource(): Promise<DataSource> {
-        return this.dataSource;
-    }
+  async getDataSource(): Promise<DataSource> {
+    return this.dataSource;
+  }
 }

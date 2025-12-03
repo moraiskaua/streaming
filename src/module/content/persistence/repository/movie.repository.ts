@@ -5,7 +5,7 @@ import { DataSource } from 'typeorm';
 
 @Injectable()
 export class MovieRepository extends DefaultTypeOrmRepository<Movie> {
-    constructor(@Inject(DataSource) readonly dataSource: DataSource) {
-        super(Movie, dataSource);
-    }
+  constructor(@Inject(DataSource) readonly dataSource: DataSource) {
+    super(Movie, dataSource);
+  }
 }

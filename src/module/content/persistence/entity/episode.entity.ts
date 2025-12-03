@@ -6,25 +6,25 @@ import { Video } from './video.entity';
 
 @Entity('episode')
 export class Episode extends DefaultEntity<Episode> {
-    @Column()
-    title: string;
+  @Column()
+  title: string;
 
-    @Column()
-    description: string;
+  @Column()
+  description: string;
 
-    @Column()
-    season: number;
+  @Column()
+  season: number;
 
-    @Column()
-    number: number;
+  @Column()
+  number: number;
 
-    @ManyToOne(() => TvShow, (tvShow) => tvShow.episodes)
-    tvShow: TvShow;
+  @ManyToOne(() => TvShow, (tvShow) => tvShow.episodes)
+  tvShow: TvShow;
 
-    @OneToOne(() => Thumbnail)
-    @JoinColumn()
-    thumbnail: Thumbnail;
+  @OneToOne(() => Thumbnail)
+  @JoinColumn()
+  thumbnail: Thumbnail;
 
-    @OneToOne(() => Video, (video) => video.episode)
-    video: Video;
+  @OneToOne(() => Video, (video) => video.episode)
+  video: Video;
 }

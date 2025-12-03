@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import {
-    PersistenceClientException,
-    PersistenceInternalException,
+  PersistenceClientException,
+  PersistenceInternalException,
 } from '@sharedLibs/core/exception/storage.exception';
 
 @Injectable()

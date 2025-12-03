@@ -6,21 +6,21 @@ import { Video } from './video.entity';
 
 @Entity({ name: 'Movie' })
 export class Movie extends DefaultEntity<Movie> {
-    @OneToOne(() => Video, (video) => video.movie, {
-        cascade: true,
-    })
-    video: Video;
+  @OneToOne(() => Video, (video) => video.movie, {
+    cascade: true,
+  })
+  video: Video;
 
-    @Column({ type: 'float', nullable: true })
-    externalRating: number | null;
+  @Column({ type: 'float', nullable: true })
+  externalRating: number | null;
 
-    @OneToOne(() => Content, (content) => content.movie)
-    @JoinColumn()
-    content: Content;
+  @OneToOne(() => Content, (content) => content.movie)
+  @JoinColumn()
+  content: Content;
 
-    @OneToOne(() => Thumbnail, {
-        cascade: true,
-    })
-    @JoinColumn()
-    thumbnail: Thumbnail;
+  @OneToOne(() => Thumbnail, {
+    cascade: true,
+  })
+  @JoinColumn()
+  thumbnail: Thumbnail;
 }

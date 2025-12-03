@@ -1,81 +1,84 @@
-import { BaseEntity, BaseEntityProps } from '@contentModule/core/entity/base.entity';
+import {
+  BaseEntity,
+  BaseEntityProps,
+} from '@contentModule/core/entity/base.entity';
 import { randomUUID } from 'crypto';
 import { ContentType } from '../enum/content-type.enum';
 import { MovieEntity } from './movie.entity';
 
 export interface ContentEntityProps extends BaseEntityProps {
-    media?: MovieEntity;
-    type: ContentType;
-    title: string;
-    description: string;
+  media?: MovieEntity;
+  type: ContentType;
+  title: string;
+  description: string;
 }
 
 export class ContentEntity extends BaseEntity {
-    private media?: ContentEntityProps['media'];
-    private type: ContentEntityProps['type'];
-    private title: ContentEntityProps['title'];
-    private description: ContentEntityProps['description'];
+  private media?: ContentEntityProps['media'];
+  private type: ContentEntityProps['type'];
+  private title: ContentEntityProps['title'];
+  private description: ContentEntityProps['description'];
 
-    private constructor(data: ContentEntityProps) {
-        super(data);
-    }
+  private constructor(data: ContentEntityProps) {
+    super(data);
+  }
 
-    static createNew(
-        data: Omit<ContentEntityProps, 'id' | 'createdAt' | 'updatedAt'>,
-        id = randomUUID(),
-    ): ContentEntity {
-        return new ContentEntity({
-            id,
-            media: data.media,
-            type: data.type,
-            title: data.title,
-            description: data.description,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        });
-    }
+  static createNew(
+    data: Omit<ContentEntityProps, 'id' | 'createdAt' | 'updatedAt'>,
+    id = randomUUID(),
+  ): ContentEntity {
+    return new ContentEntity({
+      id,
+      media: data.media,
+      type: data.type,
+      title: data.title,
+      description: data.description,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  }
 
-    static createFrom(data: ContentEntityProps): ContentEntity {
-        return new ContentEntity({
-            id: data.id,
-            media: data.media,
-            type: data.type,
-            title: data.title,
-            description: data.description,
-            createdAt: data.createdAt,
-            updatedAt: data.updatedAt,
-        });
-    }
+  static createFrom(data: ContentEntityProps): ContentEntity {
+    return new ContentEntity({
+      id: data.id,
+      media: data.media,
+      type: data.type,
+      title: data.title,
+      description: data.description,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+    });
+  }
 
-    serialize() {
-        return {
-            id: this.id,
-            title: this.title,
-            description: this.description,
-            media: this.media?.serialize(),
-            type: this.type,
-            createdAt: this.createdAt,
-            updatedAt: this.updatedAt,
-        };
-    }
+  serialize() {
+    return {
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      media: this.media?.serialize(),
+      type: this.type,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    };
+  }
 
-    addMedia(media: MovieEntity): void {
-        this.media = media;
-    }
+  addMedia(media: MovieEntity): void {
+    this.media = media;
+  }
 
-    getMedia(): MovieEntity | undefined {
-        return this.media;
-    }
+  getMedia(): MovieEntity | undefined {
+    return this.media;
+  }
 
-    getType(): ContentType {
-        return this.type;
-    }
+  getType(): ContentType {
+    return this.type;
+  }
 
-    getTitle(): string {
-        return this.title;
-    }
+  getTitle(): string {
+    return this.title;
+  }
 
-    getDescription(): string {
-        return this.description;
-    }
+  getDescription(): string {
+    return this.description;
+  }
 }

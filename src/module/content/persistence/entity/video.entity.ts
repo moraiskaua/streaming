@@ -5,20 +5,20 @@ import { Movie } from './movie.entity';
 
 @Entity({ name: 'Video' })
 export class Video extends DefaultEntity<Video> {
-    @Column()
-    url: string;
+  @Column()
+  url: string;
 
-    @Column()
-    sizeInKb: number;
+  @Column()
+  sizeInKb: number;
 
-    @Column()
-    duration: number;
+  @Column()
+  duration: number;
 
-    @OneToOne(() => Movie, (movie) => movie.video)
-    @JoinColumn()
-    movie: Movie;
+  @OneToOne(() => Movie, (movie) => movie.video)
+  @JoinColumn()
+  movie: Movie;
 
-    @OneToOne(() => Episode, (episode) => episode.video)
-    @JoinColumn()
-    episode: Episode;
+  @OneToOne(() => Episode, (episode) => episode.video)
+  @JoinColumn()
+  episode: Episode;
 }

@@ -12,18 +12,18 @@ import { VideoRepository } from './repository/video.repository';
 
 @Module({})
 export class PersistenceModule {
-    static forRoot(opts?: { migrations?: string[] }): DynamicModule {
-        const { migrations } = opts || {};
-        return {
-            module: PersistenceModule,
-            imports: [
-                TypeOrmPersistenceModule.forRoot({
-                    migrations,
-                    entities: [Content, Movie, Thumbnail, Video, TvShow, Episode],
-                }),
-            ],
-            providers: [ContentRepository, MovieRepository, VideoRepository],
-            exports: [ContentRepository, MovieRepository, VideoRepository],
-        };
-    }
+  static forRoot(opts?: { migrations?: string[] }): DynamicModule {
+    const { migrations } = opts || {};
+    return {
+      module: PersistenceModule,
+      imports: [
+        TypeOrmPersistenceModule.forRoot({
+          migrations,
+          entities: [Content, Movie, Thumbnail, Video, TvShow, Episode],
+        }),
+      ],
+      providers: [ContentRepository, MovieRepository, VideoRepository],
+      exports: [ContentRepository, MovieRepository, VideoRepository],
+    };
+  }
 }

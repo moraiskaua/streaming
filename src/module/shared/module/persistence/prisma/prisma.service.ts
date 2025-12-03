@@ -1,9 +1,9 @@
 import {
-    Injectable,
-    Logger,
-    OnApplicationShutdown,
-    OnModuleDestroy,
-    OnModuleInit,
+  Injectable,
+  Logger,
+  OnApplicationShutdown,
+  OnModuleDestroy,
+  OnModuleInit,
 } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { ConfigService } from '@sharedModule/config/service/config.service';
@@ -11,8 +11,7 @@ import { ConfigService } from '@sharedModule/config/service/config.service';
 @Injectable()
 export class PrismaService
   extends PrismaClient
-  implements OnModuleInit, OnModuleDestroy, OnApplicationShutdown
-{
+  implements OnModuleInit, OnModuleDestroy, OnApplicationShutdown {
   private logger = new Logger(PrismaService.name);
 
   constructor(private configService: ConfigService) {
