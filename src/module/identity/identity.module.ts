@@ -4,7 +4,7 @@ import {
 } from '@identityModule/core/service/authentication.service';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { PersistenceModule } from '@sharedModule/persistence/prisma/persistence.module';
+import { PersistenceModule } from '@sharedModules/persistence/prisma/persistence.module';
 import { UserManagementService } from './core/service/user-management.service';
 import { AuthResolver } from './http/graphql/auth.resolver';
 import { UserResolver } from './http/graphql/user.resolver';
@@ -26,4 +26,4 @@ import { UserRepository } from './persistence/repository/user.repository';
     UserRepository,
   ],
 })
-export class IdentityModule {}
+export class IdentityModule { }

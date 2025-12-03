@@ -1,6 +1,7 @@
-import { HttpClient } from '@contentModule/infra/http/client/http.client';
+
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@sharedModule/config/service/config.service';
+import { ConfigService } from '@sharedModules/config/service/config.service';
+import { HttpClient } from '@sharedModules/http-client/client/http.client';
 
 interface ApiResponse<T extends Record<string, any>> {
   results: Array<T>;
@@ -10,7 +11,7 @@ export class ExternalMovieRatingClient {
   constructor(
     private readonly configService: ConfigService,
     private readonly httpClient: HttpClient,
-  ) {}
+  ) { }
 
   async getRating(title: string): Promise<number | undefined> {
     const keywordId = await this.stringToKeywordId(title);
