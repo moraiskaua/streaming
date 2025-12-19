@@ -7,11 +7,15 @@ import { ContentRepository } from '@contentModule/persistence/repository/content
 import { VideoRepository } from '@contentModule/persistence/repository/video.repository';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@sharedModules/config/config.module';
-import { HttpClient } from '@sharedModules/http-client/client/http.client';
+import { HttpClientModule } from '@sharedModules/http-client/http-client.module';
 import { ExternalMovieRatingClient } from './http/rest/client/external-movie-rating/externa-movie-rating.client';
 
 @Module({
-  imports: [PersistenceModule.forRoot(), ConfigModule.forRoot()],
+  imports: [
+    PersistenceModule.forRoot(),
+    ConfigModule.forRoot(),
+    HttpClientModule,
+  ],
   controllers: [VideoUploadController, MediaPlayerController],
   providers: [
     ContentManagementService,
@@ -19,7 +23,6 @@ import { ExternalMovieRatingClient } from './http/rest/client/external-movie-rat
     ContentRepository,
     VideoRepository,
     ExternalMovieRatingClient,
-    HttpClient,
   ],
 })
 export class ContentModule { }
