@@ -39,6 +39,7 @@
       "@sharedLibs/*": [
         "./src/module/shared/*"
       ],
+      "@testInfra/*": ["./test/*"],
       "@src/*": [
         "./src/*"
       ],
