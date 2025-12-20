@@ -1,7 +1,7 @@
 import { ContentManagementService } from '@contentModule/core/service/content-management.service';
 import { MediaPlayerService } from '@contentModule/core/service/media-player.service';
+import { AdminMovieController } from '@contentModule/http/rest/controller/admin-movie.controller';
 import { MediaPlayerController } from '@contentModule/http/rest/controller/media-player.controller';
-import { VideoUploadController } from '@contentModule/http/rest/controller/video-upload.controller';
 import { PersistenceModule } from '@contentModule/persistence/persistence.module';
 import { ContentRepository } from '@contentModule/persistence/repository/content.repository';
 import { VideoRepository } from '@contentModule/persistence/repository/video.repository';
@@ -16,7 +16,7 @@ import { ExternalMovieRatingClient } from './http/rest/client/external-movie-rat
     ConfigModule.forRoot(),
     HttpClientModule,
   ],
-  controllers: [VideoUploadController, MediaPlayerController],
+  controllers: [AdminMovieController, MediaPlayerController],
   providers: [
     ContentManagementService,
     MediaPlayerService,
@@ -25,4 +25,4 @@ import { ExternalMovieRatingClient } from './http/rest/client/external-movie-rat
     ExternalMovieRatingClient,
   ],
 })
-export class ContentModule { }
+export class ContentModule {}
