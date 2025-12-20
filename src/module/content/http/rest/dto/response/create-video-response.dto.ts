@@ -24,20 +24,6 @@ export class CreateVideoResponseDto {
   @Expose()
   url: string;
 
-  @IsString()
-  @Expose()
-  @IsOptional()
-  thumbnailUrl: string;
-
-  @IsNumber()
-  @Expose()
-  @IsOptional()
-  sizeInKb: number;
-
-  @IsNumber()
-  @Expose()
-  duration: number;
-
   @IsDate()
   @Expose()
   createdAt: Date;
@@ -45,4 +31,17 @@ export class CreateVideoResponseDto {
   @IsDate()
   @Expose()
   updatedAt: Date;
+
+  @IsString()
+  @Expose()
+  @IsOptional()
+  thumbnailUrl?: string;
+
+  @IsNumber()
+  @Expose()
+  sizeInKb: number;
+
+  @IsNumber()
+  @Expose()
+  duration: number;
 }
