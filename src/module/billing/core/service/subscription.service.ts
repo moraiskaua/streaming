@@ -13,7 +13,7 @@ export class SubscriptionService {
   constructor(
     private readonly planRepository: PlanRepository,
     private readonly subscriptionRepository: SubscriptionRepository,
-  ) { }
+  ) {}
 
   async createSubscription({
     planId,
@@ -36,9 +36,8 @@ export class SubscriptionService {
     return subscription;
   }
 
-  async getSubscriptionByUserId(
-    userId: string,
-  ): Promise<SubscriptionModel | null> {
-    return this.subscriptionRepository.findByUserId(userId);
+  async isUserSubscriptionActive(userId: string): Promise<boolean> {
+    const subscription = await this.subscriptionRepository.findByUserId(userId);
+    return subscription?.status === SubscriptionStatus.Active;
   }
 }

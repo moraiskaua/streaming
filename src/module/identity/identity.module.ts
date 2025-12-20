@@ -34,6 +34,7 @@ import { UserRepository } from './persistence/repository/user.repository';
   providers: [
     {
       provide: BillingSubscriptionStatusApi,
+      // useExisting: BillingSubscriptionHttpClient,
       useExisting: BillingPublicApiProvider,
     },
     AuthService,

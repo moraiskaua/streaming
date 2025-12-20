@@ -9,6 +9,7 @@ import { planFactory } from '@testInfra/factory/identity/plan.test-factory';
 import { subscriptionFactory } from '@testInfra/factory/identity/subscription.test-factory';
 import { testDbClient } from '@testInfra/knex.database';
 import { createNestApp } from '@testInfra/test-e2e.setup';
+import nock from 'nock';
 import request from 'supertest';
 
 describe('AuthResolver (e2e)', () => {
@@ -41,6 +42,66 @@ describe('AuthResolver (e2e)', () => {
   });
 
   describe('signIn mutation', () => {
+    //this is an example of HTTP call between modules
+    it.skip('returns the authenticated user - USING HTTP for module to module calls', async () => {
+      const signInInput = {
+        email: 'johndoe@example.com',
+        password: 'password123',
+      };
+      const createdUser = await userManagementService.create(
+        UserModel.create({
+          firstName: 'John',
+          lastName: 'Doe',
+          email: signInInput.email,
+          password: signInInput.password,
+        }),
+      );
+      nock('https://localhost:3000', {
+        encodedQueryParams: true,
+        reqheaders: {
+          Authorization: (): boolean => true,
+        },
+      })
+        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .get(`/subscription/user/${createdUser.id}`)
+        .reply(200, {
+          status: 'ACTIVE',
+        });
+
+      const acessTokenResponse = await request(app.getHttpServer())
+        .post('/graphql')
+        .send({
+          query: `
+            mutation {
+              signIn(SignInInput: {
+                email: "${signInInput.email}",
+                password: "${signInInput.password}"
+              }) {
+                accessToken
+              }
+            }
+          `,
+        });
+      const response = await request(app.getHttpServer())
+        .post('/graphql')
+        .set(
+          'Authorization',
+          `Bearer ${acessTokenResponse.body.data.signIn.accessToken}`,
+        )
+        .send({
+          query: `
+            query {
+              getProfile {
+                email
+              }
+            }
+          `,
+        });
+
+      const { email } = response.body.data.getProfile;
+
+      expect(email).toEqual(signInInput.email);
+    });
     it('returns accessToken for valid credentials', async () => {
       const signInInput = {
         email: 'johndoe@example.com',
@@ -107,6 +168,7 @@ describe('AuthResolver (e2e)', () => {
     });
   });
   describe('getProfile query', () => {
+    //use local module call instead of HTTP
     it('returns the authenticated user', async () => {
       const signInInput = {
         email: 'johndoe@example.com',
