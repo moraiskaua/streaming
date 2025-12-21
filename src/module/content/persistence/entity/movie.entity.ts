@@ -1,5 +1,5 @@
-import { DefaultEntity } from '@contentModule/infra/module/typeorm/entity/default.entity';
 import { Thumbnail } from '@contentModule/persistence/entity/thumbnail.entity';
+import { DefaultEntity } from '@sharedModules/persistence/typeorm/entity/default.entity';
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { Content } from './content.entity';
 import { Video } from './video.entity';

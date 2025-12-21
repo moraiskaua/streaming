@@ -8,6 +8,9 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+/**
+ * Do not extend TypeORM's BaseEntity to avoid coupling with TypeORM
+ */
 export abstract class DefaultEntity<T> {
   constructor(data: Partial<T>) {
     Object.assign(this, data);
@@ -33,6 +36,7 @@ export abstract class DefaultEntity<T> {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  //TODO add soft remove
   @DeleteDateColumn({ nullable: true })
   deletedAt: Date | null;
 }

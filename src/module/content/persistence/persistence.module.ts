@@ -1,5 +1,6 @@
-import { TypeOrmPersistenceModule } from '@contentModule/infra/module/typeorm/typeorm-persistence.module';
+import { EpisodeRepository } from '@contentModule/persistence/repository/episode.repository';
 import { DynamicModule, Module } from '@nestjs/common';
+import { TypeOrmPersistenceModule } from '@sharedModules/persistence/typeorm/typeorm-persistence.module';
 import { Content } from './entity/content.entity';
 import { Episode } from './entity/episode.entity';
 import { Movie } from './entity/movie.entity';
@@ -22,8 +23,18 @@ export class PersistenceModule {
           entities: [Content, Movie, Thumbnail, Video, TvShow, Episode],
         }),
       ],
-      providers: [ContentRepository, MovieRepository, VideoRepository],
-      exports: [ContentRepository, MovieRepository, VideoRepository],
+      providers: [
+        ContentRepository,
+        MovieRepository,
+        VideoRepository,
+        EpisodeRepository,
+      ],
+      exports: [
+        ContentRepository,
+        MovieRepository,
+        VideoRepository,
+        EpisodeRepository,
+      ],
     };
   }
 }

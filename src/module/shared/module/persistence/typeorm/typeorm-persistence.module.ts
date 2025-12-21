@@ -17,7 +17,7 @@ export class TypeOrmPersistenceModule {
         TypeOrmModule.forRootAsync({
           imports: [ConfigModule.forRoot()],
           inject: [ConfigService],
-          useFactory: async (configService: ConfigService) => {
+          useFactory: async (configService) => {
             return {
               type: 'postgres',
               logging: false,
