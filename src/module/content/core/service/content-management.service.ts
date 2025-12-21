@@ -12,6 +12,7 @@ import { TvShow } from '@contentModule/persistence/entity/tv-show.entity';
 import { Video } from '@contentModule/persistence/entity/video.entity';
 import { ContentRepository } from '@contentModule/persistence/repository/content.repository';
 import { EpisodeRepository } from '@contentModule/persistence/repository/episode.repository';
+import { TransactionManagerService } from '@contentModule/persistence/transaction-manager.service';
 import {
   BadRequestException,
   Injectable,
@@ -35,6 +36,7 @@ export class ContentManagementService {
     private readonly videoMetadataService: VideoMetadataService,
     private readonly videoProfanityFilterService: VideoProfanityFilterService,
     private readonly ageRecommendationService: AgeRecommendationService,
+    private readonly transactionManagerService: TransactionManagerService,
   ) {}
 
   async createMovie(
@@ -155,10 +157,17 @@ export class ContentManagementService {
 
     content.ageRecommendation = ageRecommendation;
 
-    //not transactional
-    await this.contentRepository.saveTvShow(content);
-    await this.episodeRepository.save(episode);
+    return await this.transactionManagerService.executeWithinTransaction(
+      async () => {
+        await this.transactionManagerService.transactionalContentRepository.saveTvShow(
+          content,
+        );
+        await this.transactionManagerService.transactionalEpisodeRepository.save(
+          episode,
+        );
 
-    return episode;
+        return episode;
+      },
+    );
   }
 }
