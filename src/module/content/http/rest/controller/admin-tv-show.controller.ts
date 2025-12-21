@@ -10,7 +10,6 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  ParseFilePipeBuilder,
   Post,
   Req,
   UploadedFile,
@@ -42,23 +41,32 @@ export class AdminTvShowController {
           );
         },
       }),
+      fileFilter: (_req, file, cb) => {
+        if (file.mimetype !== 'image/jpeg') {
+          return cb(
+            new BadRequestException(
+              'Invalid file type. Only image/jpeg is supported for thumbnails.',
+            ),
+            false,
+          );
+        }
+        return cb(null, true);
+      },
     }),
   )
   async createTvShowContent(
     @Req() _req: Request,
     @Body() contentData: CreateTvShowRequestDto,
-    @UploadedFile(
-      new ParseFilePipeBuilder()
-        .addFileTypeValidator({
-          fileType: 'jpeg',
-        })
-        .addMaxSizeValidator({
-          maxSize: 1024 * 1024,
-        })
-        .build(),
-    )
-    thumbnail: Express.Multer.File,
+    @UploadedFile() thumbnail: Express.Multer.File,
   ): Promise<CreateTvShowResponseDto> {
+    if (!thumbnail) {
+      throw new BadRequestException('Thumbnail file is required.');
+    }
+
+    const MAX_THUMBNAIL_SIZE = 1024 * 1024; // 1 megabyte
+    if (thumbnail.size > MAX_THUMBNAIL_SIZE) {
+      throw new BadRequestException('Thumbnail size exceeds the limit.');
+    }
     const content = await this.contentManagementService.createTvShow({
       title: contentData.title,
       description: contentData.description,
@@ -87,26 +95,32 @@ export class AdminTvShowController {
           );
         },
       }),
+      fileFilter: (_req, file, cb) => {
+        if (file.mimetype !== 'video/mp4') {
+          return cb(
+            new BadRequestException(
+              'Invalid file type. Only video/mp4 is supported for videos.',
+            ),
+            false,
+          );
+        }
+        return cb(null, true);
+      },
     }),
   )
   async uploadEpisodeToTvShowContent(
     @Req() _req: Request,
     @Body() episodeData: CreateEpisodeRequestDto,
     @Param('contentId') contentId: string,
-    @UploadedFile(
-      new ParseFilePipeBuilder()
-        .addFileTypeValidator({
-          fileType: 'mp4',
-        })
-        .addMaxSizeValidator({
-          maxSize: 1024 * 1024 * 1024,
-        })
-        .build(),
-    )
-    video: Express.Multer.File,
+    @UploadedFile() video: Express.Multer.File,
   ): Promise<CreateEpisodeResponseDto> {
     if (!video) {
       throw new BadRequestException('Video file is required.');
+    }
+
+    const MAX_FILE_SIZE = 1024 * 1024 * 1024; // 1 gigabyte
+    if (video.size > MAX_FILE_SIZE) {
+      throw new BadRequestException('Video size exceeds the limit.');
     }
 
     const createdEpisode = await this.contentManagementService.createEpisode(
