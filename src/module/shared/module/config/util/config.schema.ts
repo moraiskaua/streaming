@@ -15,8 +15,12 @@ export const movieDbSchema = z.object({
   apiToken: z.string(),
   url: z.string(),
 });
-
 const billingApiSchema = z.object({
+  url: z.string(),
+});
+
+const geminiApiSchema = z.object({
+  apiKey: z.string(),
   url: z.string(),
 });
 
@@ -26,4 +30,5 @@ export const configSchema = z.object({
   database: databaseSchema,
   movieDb: movieDbSchema,
   billingApi: billingApiSchema,
+  geminiApi: geminiApiSchema,
 });

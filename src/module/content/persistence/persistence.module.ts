@@ -6,6 +6,7 @@ import { Episode } from './entity/episode.entity';
 import { Movie } from './entity/movie.entity';
 import { Thumbnail } from './entity/thumbnail.entity';
 import { TvShow } from './entity/tv-show.entity';
+import { VideoMetadata } from './entity/video-metadata.entity';
 import { Video } from './entity/video.entity';
 import { ContentRepository } from './repository/content.repository';
 import { MovieRepository } from './repository/movie.repository';
@@ -20,7 +21,15 @@ export class PersistenceModule {
       imports: [
         TypeOrmPersistenceModule.forRoot({
           migrations,
-          entities: [Content, Movie, Thumbnail, Video, TvShow, Episode],
+          entities: [
+            Content,
+            Movie,
+            Thumbnail,
+            Video,
+            TvShow,
+            Episode,
+            VideoMetadata,
+          ],
         }),
       ],
       providers: [
