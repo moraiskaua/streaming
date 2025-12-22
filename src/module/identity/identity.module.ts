@@ -2,7 +2,6 @@ import {
   AuthService,
   jwtConstants,
 } from '@identityModule/core/service/authentication.service';
-import { IdentityPersistenceModule } from '@identityModule/persistence/identity-persistence.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -13,6 +12,7 @@ import { DomainModuleIntegrationModule } from '@sharedModules/integration/interf
 import { UserManagementService } from './core/service/user-management.service';
 import { AuthResolver } from './http/graphql/auth.resolver';
 import { UserResolver } from './http/graphql/user.resolver';
+import { IdentityPersistenceModule } from './persistence/identity-persistence.module';
 import { UserRepository } from './persistence/repository/user.repository';
 
 @Module({
