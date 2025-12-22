@@ -7,4 +7,4 @@ import { HttpClient } from '@sharedModules/http-client/client/http.client';
   providers: [HttpClient],
   exports: [HttpClient],
 })
-export class HttpClientModule { }
+export class HttpClientModule {}

@@ -1,10 +1,10 @@
+import { UseGuards } from '@nestjs/common';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserManagementService } from '@identityModule/core/service/user-management.service';
 import {
   AuthGuard,
   AuthenticatedRequest,
 } from '@identityModule/http/guard/auth.guard';
-import { UseGuards } from '@nestjs/common';
-import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateUserInput } from './type/create-user-input.type';
 import { User } from './type/user.type';
 

@@ -28,7 +28,7 @@ import { extname } from 'node:path';
 export class AdminTvShowController {
   constructor(
     private readonly createTvShowUseCase: CreateTvShowUseCase,
-    private readonly createEpisodeUseCase: CreateTvShowEpisodeUseCase,
+    private readonly createEspisodeUseCase: CreateTvShowEpisodeUseCase,
   ) {}
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -110,7 +110,7 @@ export class AdminTvShowController {
       throw new BadRequestException('Video file is required.');
     }
 
-    const createdEpisode = await this.createEpisodeUseCase.execute({
+    const createdEpisode = await this.createEspisodeUseCase.execute({
       ...episodeData,
       videoUrl: video.path,
       videoSizeInKb: video.size,

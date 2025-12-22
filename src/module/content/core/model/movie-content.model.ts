@@ -26,6 +26,7 @@ export class MovieContentModel {
     Object.assign(this, {
       ...data,
       id: data.id ? data.id : randomUUID(),
+      //encapsulates the creation
       type: ContentType.MOVIE,
       createdAt: data.createdAt || Date.now(),
       updatedAt: data.updatedAt || Date.now(),

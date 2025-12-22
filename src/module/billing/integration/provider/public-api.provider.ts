@@ -7,6 +7,6 @@ export class BillingPublicApiProvider implements BillingSubscriptionStatusApi {
   constructor(private readonly subscriptionService: SubscriptionService) {}
 
   public async isUserSubscriptionActive(userId: string): Promise<boolean> {
-    return this.subscriptionService.isUserSubscriptionActive(userId);
+    return await this.subscriptionService.isUserSubscriptionActive(userId);
   }
 }

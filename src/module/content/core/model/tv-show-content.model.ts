@@ -32,6 +32,7 @@ export class TvShowContentModel {
     Object.assign(this, {
       ...data,
       id: data.id ? data.id : randomUUID(),
+      //encapsulates the creation
       type: ContentType.TV_SHOW,
       ageRecommendation: data.ageRecommendation || null,
       releaseDate: data.releaseDate || null,

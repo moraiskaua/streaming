@@ -6,7 +6,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class HttpClient {
-  constructor(private readonly httpService: HttpService) { }
+  constructor(private readonly httpService: HttpService) {}
 
   async get<T extends Record<string, any>>(
     url: string,

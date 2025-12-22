@@ -13,6 +13,10 @@ export abstract class DefaultTypeOrmRepository<T extends DefaultEntity<T>> {
     readonly entity: EntityTarget<T>,
     readonly entityManager: EntityManager,
   ) {
+    /**
+     * Note that we don't extend the Repository class from TypeORM, but we use it as a property.
+     * This way we can control the access to the repository methods and avoid exposing them to the outside world.
+     */
     this.repository = entityManager.getRepository(entity);
   }
 

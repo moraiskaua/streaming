@@ -1,7 +1,7 @@
 import { MovieContentModel } from '@contentModule/core/model/movie-content.model';
 import { AgeRecommendationService } from '@contentModule/core/service/age-recommendation.service';
 import { VideoProcessorService } from '@contentModule/core/service/video-processor.service';
-import { ExternalMovieRatingClient } from '@contentModule/http/rest/client/external-movie-rating/externa-movie-rating.client';
+import { ExternalMovieClient } from '@contentModule/http/rest/client/external-movie-rating/external-movie-rating.client';
 import { Movie } from '@contentModule/persistence/entity/movie.entity';
 import { Thumbnail } from '@contentModule/persistence/entity/thumbnail.entity';
 import { Video } from '@contentModule/persistence/entity/video.entity';
@@ -18,7 +18,7 @@ export class CreateMovieUseCase {
     private readonly contentRepository: ContentRepository,
     private readonly videoProcessorService: VideoProcessorService,
     private readonly ageRecommendationService: AgeRecommendationService,
-    private readonly externalMovieRatingClient: ExternalMovieRatingClient,
+    private readonly externalMovieRatingClient: ExternalMovieClient,
   ) {}
 
   async execute(video: {
