@@ -14,7 +14,6 @@ import { PersistenceModule } from '@sharedModules/persistence/prisma/persistence
 import { UserManagementService } from './core/service/user-management.service';
 import { AuthResolver } from './http/graphql/auth.resolver';
 import { UserResolver } from './http/graphql/user.resolver';
-import { BillingSubscriptionRepository } from './persistence/repository/external/billing-subscription.repository';
 import { UserRepository } from './persistence/repository/user.repository';
 
 @Module({
@@ -34,7 +33,6 @@ import { UserRepository } from './persistence/repository/user.repository';
   providers: [
     {
       provide: BillingSubscriptionStatusApi,
-      // useExisting: BillingSubscriptionHttpClient,
       useExisting: BillingPublicApiProvider,
     },
     AuthService,
@@ -42,7 +40,6 @@ import { UserRepository } from './persistence/repository/user.repository';
     UserResolver,
     UserManagementService,
     UserRepository,
-    BillingSubscriptionRepository,
   ],
 })
 export class IdentityModule {}

@@ -1,5 +1,12 @@
-import { ContentManagementService } from '@contentModule/core/service/content-management.service';
-import { MediaPlayerService } from '@contentModule/core/service/media-player.service';
+import { AgeRecommendationService } from '@contentModule/core/service/age-recommendation.service';
+import { ContentDistributionService } from '@contentModule/core/service/content-distribution.service';
+import { EpisodeLifecycleService } from '@contentModule/core/service/episode-lifecycle.service';
+import { VideoProcessorService } from '@contentModule/core/service/video-processor.service';
+import { VideoProfanityFilterService } from '@contentModule/core/service/video-profanity-filter.service';
+import { CreateMovieUseCase } from '@contentModule/core/use-case/create-movie.use-case';
+import { CreateTvShowEpisodeUseCase } from '@contentModule/core/use-case/create-tv-show-episode.use-case';
+import { CreateTvShowUseCase } from '@contentModule/core/use-case/create-tv-show.use-case';
+import { GetStreamingURLUseCase } from '@contentModule/core/use-case/get-streaming-url.use-case';
 import { AdminMovieController } from '@contentModule/http/rest/controller/admin-movie.controller';
 import { MediaPlayerController } from '@contentModule/http/rest/controller/media-player.controller';
 import { PersistenceModule } from '@contentModule/persistence/persistence.module';
@@ -8,9 +15,6 @@ import { VideoRepository } from '@contentModule/persistence/repository/video.rep
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@sharedModules/config/config.module';
 import { HttpClientModule } from '@sharedModules/http-client/http-client.module';
-import { AgeRecommendationService } from './core/service/age-recommendation.service';
-import { VideoMetadataService } from './core/service/video-metadata.service';
-import { VideoProfanityFilterService } from './core/service/video-profanity-filter.service';
 import { ExternalMovieRatingClient } from './http/rest/client/external-movie-rating/externa-movie-rating.client';
 import { AdminTvShowController } from './http/rest/controller/admin-tv-show.controller';
 
@@ -26,14 +30,18 @@ import { AdminTvShowController } from './http/rest/controller/admin-tv-show.cont
     AdminTvShowController,
   ],
   providers: [
-    ContentManagementService,
-    MediaPlayerService,
     ContentRepository,
     VideoRepository,
     ExternalMovieRatingClient,
     AgeRecommendationService,
-    VideoMetadataService,
     VideoProfanityFilterService,
+    VideoProcessorService,
+    EpisodeLifecycleService,
+    CreateMovieUseCase,
+    CreateTvShowEpisodeUseCase,
+    CreateTvShowUseCase,
+    GetStreamingURLUseCase,
+    ContentDistributionService,
   ],
 })
 export class ContentModule {}
